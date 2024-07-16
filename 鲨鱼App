@@ -1,2 +1,19 @@
 鲨鱼App是一款用原生开发的一款高性能的App
 开发语言Kotlin
+Kotlin性能与Java
+
+性能测试结果
+1. 性能相比Java更差相关
+对varargs参数展开，Kotlin比Java慢1倍，主要原因是在Kotlin在展开varargs前需要全量拷贝整个数组，这个是非常高的性能开销。
+对Delegated Properties的应用，**Kotlin相比Java慢10%**。
+2. 性能相比Java更优相关
+对Lambda的使用，**Kotlin相比Java快30%**，而对用例中的transaction添加inline关键字配置内联后，发现其反而慢了一点点(约1.14%)。
+Kotlin对companion object的访问相比Java中的静态变量的访问，Kotlin与Java差不多快或更快一点。
+Kotlin对局部函数(Local Functions)的访问相比Java中的局部函数的访问，Kotlin与Java差不多快或更快一点。
+Kotlin的非空参数的使用相比没有使用空检查的Java，Kotlin与Java差不多快或更快一点。
+3. Kotlin自身比较
+对于基本类型范围的使用，无论是否使用常量引用还是直接的范围速度都差不多。
+对于非基本类型范围的使用，常量引用相比直接的范围会快3%左右。
+对于范围遍历方式中，for循环方式无论有没有使用step速度都差不多，但是如果对范围直接进行.foreach速度会比它们慢3倍，因此避免对范围直接使用.foreach。
+在遍历中使用lastIndex会比使用indices快2%左右。
+
